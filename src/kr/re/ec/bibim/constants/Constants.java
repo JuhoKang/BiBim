@@ -4,7 +4,6 @@ public class Constants {
 	
 	public static abstract class ConstantFrame{
 	
-		
 	}
 
 }

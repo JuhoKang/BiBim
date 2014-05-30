@@ -1,7 +1,13 @@
 package kr.re.ec.bibim.vo;
 
-public class UserData {
+import java.io.Serializable;
+
+public class UserData implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String password;

@@ -8,6 +8,11 @@ package kr.re.ec.bibim.server.da;
  * @version 1.0
  */
 
-public class FolderDataController {
+public class FolderDataController extends DataAccess{
+
+	protected FolderDataController(String databaseFileName) {
+		super(databaseFileName);
+		// TODO Auto-generated constructor stub
+	}
 
 }

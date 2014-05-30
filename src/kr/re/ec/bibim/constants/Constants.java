@@ -11,22 +11,14 @@ package kr.re.ec.bibim.constants;
 
 public class Constants {
 
-	public static abstract class BiBimDataBaseConstantFrame {
+	public static abstract class DataBaseConstantFrame {
 
 		// DB name,version
-		public static final String DB_NAME_HEADTAG = "BiBim";
-		public static final String DB_TAG_TAILTAG = ".db";
+		public static final String DB_NAME = "BiBimDB.db";
 		public static final int DB_VERSION = 1;
 
 	}
-
-	public static abstract class UserListDataBaseConstantFrame {
-
-		// DB name,version
-		public static final String DB_NAME = "UserList.db";
-		public static final int DB_VERSION = 1;
-	}
-
+	
 	public static abstract class UserConstantFrame {
 
 		// table name
@@ -43,6 +35,7 @@ public class Constants {
 		// table name
 		public static final String TABLE_NAME = "messagenote";
 		// column name
+		public static final String COLUMN_NAME_USERID = "userid";
 		public static final String COLUMN_NAME_FOLDERID = "folderid";
 		public static final String COLUMN_NAME_FOLDERNAME = "foldername";
 
@@ -53,6 +46,7 @@ public class Constants {
 		// table name
 		public static final String TABLE_NAME = "messagenote";
 		// column name
+		public static final String COLUMN_NAME_USERID = "userid";
 		public static final String COLUMN_NAME_MESSAGENOTEID = "messagenoteid";
 		public static final String COLUMN_NAME_MESSAGENOTETITLE = "messagenotetitle";
 		public static final String COLUMN_NAME_FOLDERID = "folderid";
@@ -67,6 +61,7 @@ public class Constants {
 		// table name
 		public static final String TABLE_NAME = "note";
 		// column name
+		public static final String COLUMN_NAME_USERID = "userid";
 		public static final String COLUMN_NAME_NOTEID = "noteid";
 		public static final String COLUMN_NAME_FOLDERID = "folderid";
 		public static final String COLUMN_NAME_NOTETITLE = "notetitle";

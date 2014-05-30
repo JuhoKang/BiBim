@@ -3,6 +3,7 @@
 	<name>BiBim</name>
 	<comment></comment>
 	<projects>
+		<project>BiBimLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -14,4 +15,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>BiBimLib</name>
+			<type>2</type>
+			<location>C:/Users/Kang Juho/workspace/BiBimLib</location>
+		</link>
+	</linkedResources>
 </projectDescription>

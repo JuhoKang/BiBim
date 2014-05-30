@@ -2,7 +2,7 @@ package kr.re.ec.bibim.vowrapper;
 
 import java.io.Serializable;
 
-import kr.re.ec.bibim.vo.UserData;
+import kr.re.ec.bibim.vo.NoteData;
 
 /**
  * Wrapper Classes are for wrapping VO(Value Object)Classes for object input socket<br>
@@ -12,7 +12,7 @@ import kr.re.ec.bibim.vo.UserData;
  * @version 1.0
  */
 
-public class UserDataWrapper extends UserData implements Serializable{
+public class NoteDataWrapper extends NoteData implements Serializable{
 	
 	/**
 	 * serial Version UID
@@ -34,6 +34,5 @@ public class UserDataWrapper extends UserData implements Serializable{
 	public void setExpression(String expression) {
 		this.expression = expression;
 	}
-	
 
 }

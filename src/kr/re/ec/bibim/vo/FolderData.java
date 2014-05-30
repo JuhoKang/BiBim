@@ -1,7 +1,8 @@
 package kr.re.ec.bibim.vo;
 
+
 public class FolderData {
-	
+		
 	private String id;
 	private String name;
 	

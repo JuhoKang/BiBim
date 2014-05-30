@@ -1,8 +1,6 @@
 package kr.re.ec.bibim.vo;
 
-import java.io.Serializable;
-
-public class UserData implements Serializable{
+public class UserData {
 	
 	private int id;
 	private String name;

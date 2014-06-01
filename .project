@@ -3,10 +3,9 @@
 	<name>BiBim</name>
 	<comment></comment>
 	<projects>
-<<<<<<< HEAD
-=======
+
 		<project>BiBimLib</project>
->>>>>>> refs/heads/juho
+
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -2,16 +2,29 @@ package kr.re.ec.bibim.vo;
 
 public class NoteData {
 	
-	private int id;
+	private int noteid;
+	private int userid;
+	private int folderid;
 	private String title;
 	private String content;
 	private String date;
-	
-	public int getId() {
-		return id;
+	public int getNoteid() {
+		return noteid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setNoteid(int noteid) {
+		this.noteid = noteid;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public int getFolderid() {
+		return folderid;
+	}
+	public void setFolderid(int folderid) {
+		this.folderid = folderid;
 	}
 	public String getTitle() {
 		return title;
@@ -31,5 +44,6 @@ public class NoteData {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
+	
+	
 }

@@ -161,9 +161,9 @@ public class FolderDataController extends DataAccess {
 			stmt = c.createStatement();
 			String query = "SELECT "
 					+ Constants.FolderConstantFrame.COLUMN_NAME_FOLDERID + ", "
-					+ Constants.UserConstantFrame.COLUMN_NAME_USERNAME + ", "
-					+ Constants.UserConstantFrame.COLUMN_NAME_USERPWD
-					+ " FROM " + Constants.UserConstantFrame.TABLE_NAME + ";";
+					+ Constants.FolderConstantFrame.COLUMN_NAME_FOLDERNAME
+					+ ", " + Constants.FolderConstantFrame.COLUMN_NAME_USERID
+					+ " FROM " + Constants.FolderConstantFrame.TABLE_NAME + ";";
 			LogUtil.v("query: " + query);
 			rs = stmt.executeQuery(query);
 
@@ -241,11 +241,6 @@ public class FolderDataController extends DataAccess {
 		}
 
 		return result;
-	}
-
-	protected FolderDataController(String databaseFileName) {
-		super(databaseFileName);
-		// TODO Auto-generated constructor stub
 	}
 
 }

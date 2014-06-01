@@ -95,7 +95,7 @@ public class UserDataController extends DataAccess{
 					+ Constants.UserConstantFrame.TABLE_NAME  + " ( " 
 					+ Constants.UserConstantFrame.COLUMN_NAME_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
 					+ Constants.UserConstantFrame.COLUMN_NAME_USERNAME + " TEXT NOT NULL UNIQUE, " 
-					+ Constants.UserConstantFrame.COLUMN_NAME_USERPWD + " TEXT UNIQUE );"; 
+					+ Constants.UserConstantFrame.COLUMN_NAME_USERPWD + " TEXT );"; //should not be UNIQUE Deleted UNIQUE
 			//this query depends on SQLite
 			LogUtil.v("query: " + query);
 						

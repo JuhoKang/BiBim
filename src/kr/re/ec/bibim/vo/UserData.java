@@ -8,15 +8,14 @@ public class UserData implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int userid;
 	private String name;
 	private String password;
-	
-	public int getId() {
-		return id;
+	public int getUserid() {
+		return userid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	public String getName() {
 		return name;
@@ -30,5 +29,8 @@ public class UserData implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
+	
+	
 }

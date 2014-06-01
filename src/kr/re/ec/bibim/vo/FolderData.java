@@ -3,14 +3,15 @@ package kr.re.ec.bibim.vo;
 
 public class FolderData {
 		
-	private String id;
+	private int folderid;
 	private String name;
+	private int userid;
 	
-	public String getId() {
-		return id;
+	public int getFolderid() {
+		return folderid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setFolderid(int folderid) {
+		this.folderid = folderid;
 	}
 	public String getName() {
 		return name;
@@ -18,5 +19,11 @@ public class FolderData {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	
 }

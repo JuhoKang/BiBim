@@ -143,7 +143,7 @@ public class UserDataController extends DataAccess{
 	 * @return ArrayList<Directory> 
 	 */
 	public ArrayList<UserData> findAll() { 
-		ArrayList<UserData> resultUsers = new ArrayList<UserData>();
+		ArrayList<UserData> resultusers = new ArrayList<UserData>();
 		
 		open();
 		Connection c = getConnection();
@@ -161,11 +161,11 @@ public class UserDataController extends DataAccess{
 			
 			while(rs.next()) {
 				UserData userdata = new UserData();
-				userdata.setId(rs.getInt(Constants.UserConstantFrame.COLUMN_NAME_USERID));
+				userdata.setUserid(rs.getInt(Constants.UserConstantFrame.COLUMN_NAME_USERID));
 				userdata.setName(rs.getString(Constants.UserConstantFrame.COLUMN_NAME_USERNAME));
 				userdata.setPassword(rs.getString(Constants.UserConstantFrame.COLUMN_NAME_USERPWD));
-				LogUtil.d("userdata :"+ userdata.getId()+"\t"+userdata.getName()+"\t"+userdata.getPassword());
-				resultUsers.add(userdata);
+				LogUtil.d("userdata :"+ userdata.getUserid()+"\t"+userdata.getName()+"\t"+userdata.getPassword());
+				resultusers.add(userdata);
 			}
 			rs.close();
 			stmt.close();
@@ -175,7 +175,7 @@ public class UserDataController extends DataAccess{
 			close();
 		}
 		
-		return resultUsers;
+		return resultusers;
 	}
 	
 	public int insert(UserData userdata) { 

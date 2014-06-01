@@ -30,7 +30,7 @@ public class WrappedClassOpener {
 	{
 		UserData ud = new UserData();
 		
-		ud.setId(udw.getId());
+		ud.setUserid(udw.getUserid());
 		ud.setName(udw.getName());
 		ud.setPassword(udw.getPassword());
 		

@@ -63,12 +63,12 @@ public class ServerNetworkController {
 			
 			// convert ObjectInputStream object to String
 			udw = (UserDataWrapper)ois.readObject();
-			LogUtil.d("udw is: "+udw.getId()+"\t"+udw.getName()+"\t"+udw.getPassword());
+			LogUtil.d("udw is: "+udw.getUserid()+"\t"+udw.getName()+"\t"+udw.getPassword());
 			if (udw.getQueryHeader().matches("Login"))
 			{
 				LogUtil.d("QueryHeader is Login");
 				loginuser = WrappedClassOpener.getInstance().OpenUserDataWrapper(udw);
-				LogUtil.d("openedclass: "+loginuser.getId()+"\t"+loginuser.getName()+"\t"+loginuser.getPassword());
+				LogUtil.d("openedclass: "+loginuser.getUserid()+"\t"+loginuser.getName()+"\t"+loginuser.getPassword());
 				try {
 					loginuser = ServerUserAuthentication.checkLogin(loginuser.getName(), loginuser.getPassword());
 				} catch(Exception e){
@@ -81,13 +81,13 @@ public class ServerNetworkController {
 					socket.getOutputStream());
 			// write object to Socket	
 			oos.writeObject(udw);
-			System.out.println("Message Sent: "+udw.getId());
+			System.out.println("Message Sent: "+udw.getUserid());
 			// close resources
 			ois.close();
 			oos.close();
 			socket.close();
 			// terminate the server if client sends exit request
-			if (udw.getId() == 10)
+			if (udw.getUserid() == 10)
 				break;
 		}
 		System.out.println("Shutting down Socket server!!");

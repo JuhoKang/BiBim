@@ -3,7 +3,9 @@
 	<name>BiBim</name>
 	<comment></comment>
 	<projects>
+
 		<project>BiBimLib</project>
+
 	</projects>
 	<buildSpec>
 		<buildCommand>

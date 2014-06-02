@@ -43,7 +43,7 @@ public class LoginFrame extends AbstractFrame {
 		pn1.add(new JLabel("ID"));
 		pn1.add(tf1);
 		JPanel pn2 = new JPanel(new FlowLayout());
-		pn2.add(new JLabel("Passward"));
+		pn2.add(new JLabel("Password"));
 		pn2.add(tf2);
 		JPanel pn3 = new JPanel(new FlowLayout());
 		pn3.add(bt1);

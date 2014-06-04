@@ -5,8 +5,8 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
-
-class PopupFrame extends JDialog {
+//changed to public
+public class PopupFrame extends JDialog {
 
 	/**
 	 * 

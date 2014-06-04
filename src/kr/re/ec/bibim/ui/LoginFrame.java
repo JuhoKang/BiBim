@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class LoginFrame implements ActionListener {
+	
+	//changed to protected
+	
 	private boolean topview = true;
 	private Container con;
 	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드

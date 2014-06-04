@@ -6,16 +6,17 @@ import java.awt.event.*;
 
 public class SignupFrame implements ActionListener {
 	private boolean topview = true;
-	private Container con;
 	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
 	protected JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸 패스워드 필드
 	protected JPasswordField pwdchecktextfield = new JPasswordField(10); // 비밀번호 확인 패스워드 필드
 	protected JButton signupbt = new JButton("가입");
 	protected JButton cancelbt = new JButton("취소");
+	GridBagLayout gbl;
+	GridBagConstraints gbc;
 
 	public void init() {
 		JFrame jf = new JFrame();
-		jf.setSize(500, 300);
+		jf.setSize(400, 200);
 		jf.setAlwaysOnTop(topview);
 		jf.setTitle("회원가입");
 		jf.setVisible(true);
@@ -38,24 +39,50 @@ public class SignupFrame implements ActionListener {
 		 */
 
 		// 화면구성
-		con = jf.getContentPane();
-		JPanel pn1 = new JPanel(new GridLayout(1,2));
-		pn1.add(new JLabel("아이디"));
-		pn1.add(idtextfield);
-		JPanel pn2 = new JPanel(new GridLayout(1,2));
-		pn2.add(new JLabel("비밀번호"));
-		pn2.add(pwdtextfield);
-		JPanel pn3 = new JPanel(new GridLayout(1,2));
-		pn3.add(new JLabel("비밀번호 확인"));
-		pn3.add(pwdchecktextfield);
-		JPanel pn4 = new JPanel(new GridLayout(1,2));
-		pn4.add(signupbt);
-		pn4.add(cancelbt);
-		con.setLayout(new GridLayout(4, 1));
-		con.add(pn1);
-		con.add(pn2);
-		con.add(pn3);
-		con.add(pn4);
+		gbl = new GridBagLayout();
+		jf.setLayout(gbl);
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.gridx = 0;
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.2;
+		gbc.insets.right = 10;
+		jf.add(new JLabel("아이디"),gbc);
+		gbc.gridx = 1;
+		gbc.gridwidth = 2;
+		gbc.weightx = 0.2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		jf.add(idtextfield,gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.weightx = 0.1;
+		gbc.fill = GridBagConstraints.NONE;
+		jf.add(new JLabel("비밀번호"),gbc);
+		gbc.gridx = 1;
+		gbc.gridwidth = 2;
+		gbc.weightx = 0.2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		jf.add(pwdtextfield,gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 1;
+		gbc.weightx = 0.1;
+		gbc.fill = GridBagConstraints.NONE;
+		jf.add(new JLabel("비밀번호 확인"),gbc);
+		gbc.gridx = 1;
+		gbc.gridwidth = 2;
+		gbc.weightx = 0.2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		jf.add(pwdchecktextfield,gbc);
+		JPanel pn1 = new JPanel();
+		pn1.add(signupbt);
+		pn1.add(cancelbt);
+		gbc.gridy = 3;
+		gbc.gridx = 0;
+		gbc.gridwidth = 3;
+		jf.add(pn1,gbc);
 		
 		//signupbt.putClientProperty("JComponent.sizeVariant","mini");
 

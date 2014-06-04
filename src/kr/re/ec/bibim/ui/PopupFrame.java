@@ -2,11 +2,13 @@ package kr.re.ec.bibim.ui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 //changed to public
-public class PopupFrame extends JDialog {
+public class PopupFrame extends JDialog{
 
 	/**
 	 * 
@@ -14,6 +16,7 @@ public class PopupFrame extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	JLabel jlb = new JLabel("");
+	protected JButton exitbtn = new JButton("확인");
 	//JFrame jlb = new JFrame();
 
 	public PopupFrame(String str) {
@@ -21,7 +24,6 @@ public class PopupFrame extends JDialog {
 		getContentPane().add(jlb);
 
 		jlb.setText(str.toString());
-
 		// 전체 창 사이즈 가져오는거
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -33,7 +35,7 @@ public class PopupFrame extends JDialog {
 
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
-		this.setSize(150, 150);
+		this.setSize(200, 300);
 		this.setVisible(true);
 		
 

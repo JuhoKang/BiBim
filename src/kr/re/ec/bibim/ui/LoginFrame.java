@@ -9,16 +9,18 @@ public class LoginFrame implements ActionListener {
 	//changed to protected
 	
 	private boolean topview = true;
-	private Container con;
 	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
 	protected JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸
 																	// 패스워드 필드
 	protected JButton signupbt = new JButton("가입");
 	protected JButton loginbt = new JButton("확인");
+	
+	GridBagLayout gbl;
+	GridBagConstraints gbc;
 
 	public void init() {
 		JFrame jf = new JFrame();
-		jf.setSize(500, 300);
+		jf.setSize(350, 200);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 닫으면 프로그램 종료
 		jf.setAlwaysOnTop(topview);
 		jf.setTitle("로그인");
@@ -40,20 +42,39 @@ public class LoginFrame implements ActionListener {
 		 */
 
 		// 화면구성
-		con = jf.getContentPane();
-		JPanel pn1 = new JPanel(new FlowLayout());
-		pn1.add(new JLabel("ID"));
-		pn1.add(idtextfield);
-		JPanel pn2 = new JPanel(new FlowLayout());
-		pn2.add(new JLabel("Password"));
-		pn2.add(pwdtextfield);
-		JPanel pn3 = new JPanel(new FlowLayout());
-		pn3.add(signupbt);
-		pn3.add(loginbt);
-		con.setLayout(new GridLayout(3, 1));
-		con.add(pn1);
-		con.add(pn2);
-		con.add(pn3);
+		gbl = new GridBagLayout();
+		jf.setLayout(gbl);
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.gridx = 0;
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.2;
+		gbc.insets.right = 10;
+		jf.add(new JLabel("아이디"),gbc);
+		gbc.gridx = 1;
+		gbc.gridwidth = 2;
+		gbc.weightx = 0.2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		jf.add(idtextfield,gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.weightx = 0.1;
+		gbc.fill = GridBagConstraints.NONE;
+		jf.add(new JLabel("비밀번호"),gbc);
+		gbc.gridx = 1;
+		gbc.gridwidth = 2;
+		gbc.weightx = 0.2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		jf.add(pwdtextfield,gbc);
+		JPanel pn1 = new JPanel();
+		pn1.add(signupbt);
+		pn1.add(loginbt);
+		gbc.gridy = 2;
+		gbc.gridx = 0;
+		gbc.gridwidth = 3;
+		jf.add(pn1,gbc);
 
 		signupbt.addActionListener(this);
 		loginbt.addActionListener(this);

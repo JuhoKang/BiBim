@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import kr.re.ec.bibim.ThisUser;
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.ui.LoginFrame;
 import kr.re.ec.bibim.ui.MainFrame;
@@ -18,7 +19,7 @@ public class LoginController extends LoginFrame{
 		
 	}
 	
-	private UserDataWrapper wrapUserDataToLogin(UserData userdata){
+	public UserDataWrapper wrapUserDataToLogin(UserData userdata){
 		
 		UserDataWrapper udw = new UserDataWrapper();
 		
@@ -67,8 +68,12 @@ public class LoginController extends LoginFrame{
 	    			new PopupFrame(arg0.getActionCommand() + " 서버와의 연결에 실패 했습니다 ");
 	    		}
 	    		else {
-	    			//new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
-	    			new MainFrame();
+	    			
+	    			ThisUser.setUserid(loginuser.getUserid());
+	    			LogUtil.d("users userid is:"+ThisUser.getUserid());
+	    			new MainController().init();
+	    			new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			
 	    		}
 	    		
 	            

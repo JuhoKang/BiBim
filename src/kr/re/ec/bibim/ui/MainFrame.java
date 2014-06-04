@@ -17,27 +17,30 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import kr.re.ec.bibim.vo.FolderData;
+import kr.re.ec.bibim.vo.NoteData;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1446530117300808753L;
 	private boolean topview = true;
 	protected JButton noteaddbt = new JButton("노트추가");
-	protected JButton notervbt = new JButton("노트제거");
-	protected JButton addButton = new JButton("추가");
-	protected JButton removeButton = new JButton("제거");
+	protected JButton notermbt = new JButton("노트제거");
+	protected JButton folderaddbt= new JButton("폴더추가");
+	protected JButton folderrmbt = new JButton("폴더제거");
 	
-	@SuppressWarnings("rawtypes")
-	JList list = null;
-	JList list2 = null;
+	
+	JList<String> folderlist = null;
+	JList<String> notelist = null;
 	private Container con;
-	DefaultListModel<FolderData> model1 = new DefaultListModel<FolderData>();
-	DefaultListModel<FolderData> model2= new DefaultListModel<FolderData>();
-	ArrayList<FolderData> ar1 = new ArrayList<FolderData>();
-	ArrayList<FolderData> ar2 = new ArrayList<FolderData>(); 
-	public MainFrame() {
+	DefaultListModel<String> foldermodel = new DefaultListModel<String>();
+	DefaultListModel<String> notemodel = new DefaultListModel<String>();
+//	DefaultListModel<FolderData> model1 = new DefaultListModel<FolderData>();
+//	DefaultListModel<FolderData> model2= new DefaultListModel<FolderData>();
+	ArrayList<FolderData> arfolder = new ArrayList<FolderData>();
+	ArrayList<NoteData> arnote = new ArrayList<NoteData>(); 
+	public void init() {
 		setTitle("Note Manager");
 
 	//	String items2[] = { "자바", "jsp", "html5", "안드로이드" };
@@ -46,19 +49,20 @@ public class MainFrame extends JFrame {
 	//	list2 = new JList<String>(items2);
 		
 		setLayout(new BorderLayout());
+		/*
 		final FolderData folder = new FolderData();
 		for(int i=0 ; i< 30 ; i++){
 			folder.setFolderid(i);
 			folder.getFolderid();
 			model1.addElement(folder);
 		}
+		*/
 		
+		folderlist = new JList(foldermodel);
+		JScrollPane pane = new JScrollPane(folderlist);
 		
-		list = new JList(model1);
-		JScrollPane pane = new JScrollPane(list);
-		
-		list2 = new JList(model2);
-		JScrollPane pane2 = new JScrollPane(list2);
+		notelist = new JList(notemodel);
+		JScrollPane pane2 = new JScrollPane(notelist);
 
 
 		con = getContentPane();
@@ -66,45 +70,23 @@ public class MainFrame extends JFrame {
 		JPanel pn12 = new JPanel(new GridLayout(1, 2));
 		pn1.add(pane, BorderLayout.CENTER);
 		pn1.add(pn12, BorderLayout.SOUTH);
-		pn12.add(addButton);
-		pn12.add(removeButton);
+		pn12.add(folderaddbt);
+		pn12.add(folderrmbt);
 		JPanel pn2 = new JPanel(new BorderLayout());
 		JPanel pn22 = new JPanel(new GridLayout(1, 2));
 		pn2.add(pane2, BorderLayout.CENTER);
 		pn2.add(pn22, BorderLayout.SOUTH);
 		pn22.add(noteaddbt);
-		pn22.add(notervbt);
+		pn22.add(notermbt);
 		con.setLayout(new GridLayout(1, 2));
 		con.add(pn1);
 		con.add(pn2);
 
-		addButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				model1.addElement(folder);
-			}
-		});
+		noteaddbt.addActionListener(this);
+		notermbt.addActionListener(this);
+		folderaddbt.addActionListener(this);
+		folderrmbt.addActionListener(this);
 		
-		
-		removeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int index = list.getSelectedIndex();
-				model1.remove(index);
-			}
-		});
-		
-		noteaddbt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				model2.addElement(folder);
-			}
-		});
-		
-		
-		notervbt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int index = list2.getSelectedIndex();
-			    model2.remove(index);
-			}
-		});
 		
 		 ListSelectionListener listSelectionListener = new ListSelectionListener() {
 		      public void valueChanged(ListSelectionEvent listSelectionEvent) {
@@ -126,7 +108,7 @@ public class MainFrame extends JFrame {
 		        }
 		      }
 		    };
-		list.addListSelectionListener(listSelectionListener);
+		folderlist.addListSelectionListener(listSelectionListener);
 
 	    MouseListener mouseListener = new MouseAdapter() {
 	      public void mouseClicked(MouseEvent mouseEvent) {
@@ -140,7 +122,7 @@ public class MainFrame extends JFrame {
 	        }
 	      }
 	    };
-	    list.addMouseListener(mouseListener);
+	    notelist.addMouseListener(mouseListener);
 
 		// 전체 창 사이즈 가져오는거네
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -154,5 +136,18 @@ public class MainFrame extends JFrame {
 		setSize(700, 400);
 		setVisible(true);
 		setAlwaysOnTop(topview);
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if (arg0.getSource() == noteaddbt) {
+			
+		} else if (arg0.getSource() == notermbt) {
+			
+		} else if (arg0.getSource() == folderaddbt){
+			
+		} else if (arg0.getSource() == folderrmbt) {
+			
+		}
 	}
 }

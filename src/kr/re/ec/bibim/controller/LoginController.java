@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import kr.re.ec.bibim.ui.LoginFrame;
+import kr.re.ec.bibim.ui.MainFrame;
 import kr.re.ec.bibim.ui.PopupFrame;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.UserData;
@@ -61,7 +62,8 @@ public class LoginController extends LoginFrame{
 	    			new PopupFrame(arg0.getActionCommand() + " 회원이 아닙니다 회원가입을 해주세요 ");
 	    		}
 	    		else {
-	    			new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			//new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			new MainFrame();
 	    		}
 	    		
 	            

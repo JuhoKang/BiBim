@@ -11,7 +11,7 @@ public class SignupFrame implements ActionListener {
 	protected JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸 패스워드 필드
 	protected JPasswordField pwdchecktextfield = new JPasswordField(10); // 비밀번호 확인 패스워드 필드
 	protected JButton signupbt = new JButton("가입");
-	protected JButton loginbt = new JButton("취소");
+	protected JButton cancelbt = new JButton("취소");
 
 	public void init() {
 		JFrame jf = new JFrame();
@@ -50,7 +50,7 @@ public class SignupFrame implements ActionListener {
 		pn3.add(pwdchecktextfield);
 		JPanel pn4 = new JPanel(new GridLayout(1,2));
 		pn4.add(signupbt);
-		pn4.add(loginbt);
+		pn4.add(cancelbt);
 		con.setLayout(new GridLayout(4, 1));
 		con.add(pn1);
 		con.add(pn2);
@@ -60,7 +60,7 @@ public class SignupFrame implements ActionListener {
 		//signupbt.putClientProperty("JComponent.sizeVariant","mini");
 
 		signupbt.addActionListener(this);
-		loginbt.addActionListener(this);
+		cancelbt.addActionListener(this);
 
 	}
 
@@ -68,7 +68,7 @@ public class SignupFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == signupbt) {
 			
-		} else if (arg0.getSource() == loginbt) {
+		} else if (arg0.getSource() == cancelbt) {
 			
 		}
 	}

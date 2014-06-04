@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import sun.rmi.runtime.Log;
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.util.LogUtil;
+import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.UserData;
 import kr.re.ec.bibim.vowrapper.FolderDataWrapper;
 import kr.re.ec.bibim.vowrapper.UserDataWrapper;
@@ -50,7 +51,7 @@ public class ClientNetworkController {
 
 		// establish socket connection to server
 		socket = new Socket(host.getHostName(),
-				Constants.NetworkConstantFrame.PORT);
+				Constants.NetworkConstantFrame.SUBPORT);
 
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
@@ -83,7 +84,7 @@ public class ClientNetworkController {
 
 		// establish socket connection to server
 		socket = new Socket(host.getHostName(),
-				Constants.NetworkConstantFrame.PORT);
+				Constants.NetworkConstantFrame.SUBPORT);
 
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
@@ -118,7 +119,7 @@ public class ClientNetworkController {
 
 		// establish socket connection to server
 		socket = new Socket(host.getHostName(),
-				Constants.NetworkConstantFrame.PORT);
+				Constants.NetworkConstantFrame.SUBPORT);
 
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
@@ -147,10 +148,12 @@ public class ClientNetworkController {
 		Socket socket = null;
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
+		
+		FolderData folder = new FolderData();
 
 		// establish socket connection to server
 		socket = new Socket(host.getHostName(),
-				Constants.NetworkConstantFrame.PORT);
+				Constants.NetworkConstantFrame.SUBPORT);
 
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
@@ -158,8 +161,8 @@ public class ClientNetworkController {
 		System.out.println("Sending Folder Add request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
-		fdw = (FolderDataWrapper) ois.readObject();
-		System.out.println("Message got: " + fdw.getFolderid());
+		folder = (FolderData) ois.readObject();
+		System.out.println("Message got: " + folder.getFolderid());
 		// close resources
 		socket.close();
 		ois.close();
@@ -178,7 +181,7 @@ public class ClientNetworkController {
 
 				// establish socket connection to server
 				socket = new Socket(host.getHostName(),
-						Constants.NetworkConstantFrame.SUBPORT);
+						Constants.NetworkConstantFrame.PORT);
 
 				// write to socket using ObjectOutputStream
 				oos = new ObjectOutputStream(socket.getOutputStream());

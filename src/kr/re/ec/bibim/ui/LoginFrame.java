@@ -5,13 +5,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class LoginFrame implements ActionListener {
+	
+	//changed to protected
+	
 	private boolean topview = true;
 	private Container con;
-	private JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
-	private JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸
+	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
+	protected JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸
 																	// 패스워드 필드
-	private JButton signupbt = new JButton("가입");
-	private JButton loginbt = new JButton("확인");
+	protected JButton signupbt = new JButton("가입");
+	protected JButton loginbt = new JButton("확인");
 
 	public void init(){
 		JFrame jf = new JFrame();	

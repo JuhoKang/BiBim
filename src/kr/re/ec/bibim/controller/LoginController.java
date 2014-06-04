@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.ui.LoginFrame;
+import kr.re.ec.bibim.ui.MainFrame;
 import kr.re.ec.bibim.ui.PopupFrame;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.UserData;
@@ -66,7 +67,8 @@ public class LoginController extends LoginFrame{
 	    			new PopupFrame(arg0.getActionCommand() + " 서버와의 연결에 실패 했습니다 ");
 	    		}
 	    		else {
-	    			new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			//new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			new MainFrame();
 	    		}
 	    		
 	            

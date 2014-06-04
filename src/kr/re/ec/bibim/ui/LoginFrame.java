@@ -45,7 +45,7 @@ public class LoginFrame implements ActionListener {
 		pn1.add(new JLabel("ID"));
 		pn1.add(idtextfield);
 		JPanel pn2 = new JPanel(new FlowLayout());
-		pn2.add(new JLabel("Passward"));
+		pn2.add(new JLabel("Password"));
 		pn2.add(pwdtextfield);
 		JPanel pn3 = new JPanel(new FlowLayout());
 		pn3.add(signupbt);
@@ -65,7 +65,8 @@ public class LoginFrame implements ActionListener {
 		if (arg0.getSource() == signupbt) {
 			new SignupFrame().init();
 		} else if (arg0.getSource() == loginbt) {
-			new PopupFrame(arg0.getActionCommand() + " 버튼을 누르셨군요!");
+			//new PopupFrame(arg0.getActionCommand() + " 버튼을 누르셨군요!");
+			new MainFrame();
 		}
 	}
 

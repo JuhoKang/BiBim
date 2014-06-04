@@ -84,7 +84,7 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(udw);
-		System.out.println("Sending request to Socket Server");
+		System.out.println("Sending Login request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		userdata = (UserData) ois.readObject();
@@ -97,6 +97,40 @@ public class ClientNetworkController {
 		Thread.sleep(100);
 		
 		return userdata;
+	}
+	
+	public int SignupRequest(UserDataWrapper udw) throws UnknownHostException,
+	IOException, ClassNotFoundException, InterruptedException {
+		
+			UserData userdata = new UserData();
+		
+		// get the localhost IP address, if server is running on some other IP,
+				// you need to use that
+				InetAddress host = InetAddress.getLocalHost();
+				Socket socket = null;
+				ObjectOutputStream oos = null;
+				ObjectInputStream ois = null;
+
+				// establish socket connection to server
+				socket = new Socket(host.getHostName(),
+						Constants.NetworkConstantFrame.PORT);
+
+				// write to socket using ObjectOutputStream
+				oos = new ObjectOutputStream(socket.getOutputStream());
+				oos.writeObject(udw);
+				System.out.println("Sending Sign up request to Socket Server");
+				// read the server response message
+				ois = new ObjectInputStream(socket.getInputStream());
+				userdata = (UserData) ois.readObject();
+				System.out.println("Message got: " + userdata.getUserid());
+				// close resources
+				socket.close();
+				ois.close();
+				oos.close();
+				Thread.sleep(100);
+				
+				return userdata.getUserid();
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import kr.re.ec.bibim.ThisUser;
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.ui.AddFolderFrame;
+import kr.re.ec.bibim.ui.MainFrame;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.UserData;
 import kr.re.ec.bibim.vowrapper.FolderDataWrapper;
@@ -51,10 +52,12 @@ public class AddFolderController extends AddFolderFrame{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			MainController.getInstance().getFolderList();
+			jf.dispose();
 			
 			
 		} else if (arg0.getSource() == cancelbt) {
-			
+			jf.dispose();
 		}
 	}
 

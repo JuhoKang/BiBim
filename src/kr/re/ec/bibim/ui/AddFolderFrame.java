@@ -7,12 +7,13 @@ import java.awt.event.*;
 public class AddFolderFrame implements ActionListener {
 	private boolean topview = true;
 	private Container con;
+	protected JFrame jf= new JFrame();
 	protected JTextField foldernametextfield = new JTextField(20); // 아이디를 쓸 텍스트 필드
 	protected JButton okbt = new JButton("확인");
 	protected JButton cancelbt = new JButton("취소");
 
 	public void init() {
-		JFrame jf = new JFrame();
+		
 		jf.setSize(350, 100);
 		jf.setAlwaysOnTop(topview);
 		jf.setTitle("폴더제목");

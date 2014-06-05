@@ -93,7 +93,7 @@ public class SignupController extends SignupFrame{
 			
 			
 		} else if (arg0.getSource() == cancelbt) {
-			
+			jf.dispose();
 		}
 	}
 

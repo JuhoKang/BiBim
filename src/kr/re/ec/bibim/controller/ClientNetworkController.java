@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import sun.rmi.runtime.Log;
 import kr.re.ec.bibim.constants.Constants;
@@ -71,9 +72,9 @@ public class ClientNetworkController {
 	public UserData LoginRequest(UserDataWrapper udw)
 			throws UnknownHostException, IOException, ClassNotFoundException,
 			InterruptedException {
-		
+
 		notificateServer(Constants.NotificationConstantFrame.USER);
-		
+
 		UserData userdata = new UserData();
 		// get the localhost IP address, if server is running on some other IP,
 		// you need to use that
@@ -107,7 +108,7 @@ public class ClientNetworkController {
 	public int SignupRequest(UserDataWrapper udw) throws UnknownHostException,
 			IOException, ClassNotFoundException, InterruptedException {
 		notificateServer(Constants.NotificationConstantFrame.USER);
-		
+
 		UserData userdata = new UserData();
 
 		// get the localhost IP address, if server is running on some other IP,
@@ -139,8 +140,80 @@ public class ClientNetworkController {
 
 	}
 
-	public void AddFolderRequest(FolderDataWrapper fdw) throws UnknownHostException,
+	public void FolderDeleteRequest(FolderDataWrapper fdw) throws UnknownHostException,
 			IOException, ClassNotFoundException, InterruptedException {
+		notificateServer(Constants.NotificationConstantFrame.FOLDER);
+
+		FolderData folder = new FolderData();
+
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(fdw);
+		System.out.println("Sending Sign up request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		folder = (FolderData) ois.readObject();
+		System.out.println("Message got: " + folder.getUserid());
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		Thread.sleep(100);
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<FolderData> FolderSelectRequest(UserDataWrapper udw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+
+		ArrayList<FolderData> resultfolders = new ArrayList<FolderData>();
+		notificateServer(Constants.NotificationConstantFrame.USER);
+
+		UserData userdata = new UserData();
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(udw);
+		System.out.println("Sending Folder Select request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		resultfolders = (ArrayList<FolderData>) ois.readObject();
+
+		LogUtil.d("getting all folders");
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		Thread.sleep(100);
+
+		return resultfolders;
+	}
+
+	public void AddFolderRequest(FolderDataWrapper fdw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
 		notificateServer(Constants.NotificationConstantFrame.FOLDER);
 		// get the localhost IP address, if server is running on some other IP,
 		// you need to use that
@@ -148,7 +221,7 @@ public class ClientNetworkController {
 		Socket socket = null;
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
-		
+
 		FolderData folder = new FolderData();
 
 		// establish socket connection to server
@@ -169,35 +242,36 @@ public class ClientNetworkController {
 		oos.close();
 		Thread.sleep(100);
 	}
-	
-	public void notificateServer(String type) throws IOException, ClassNotFoundException, InterruptedException{
-		
+
+	public void notificateServer(String type) throws IOException,
+			ClassNotFoundException, InterruptedException {
+
 		// get the localhost IP address, if server is running on some other IP,
-				// you need to use that
-				InetAddress host = InetAddress.getLocalHost();
-				Socket socket = null;
-				ObjectOutputStream oos = null;
-				ObjectInputStream ois = null;
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
 
-				// establish socket connection to server
-				socket = new Socket(host.getHostName(),
-						Constants.NetworkConstantFrame.PORT);
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.PORT);
 
-				// write to socket using ObjectOutputStream
-				oos = new ObjectOutputStream(socket.getOutputStream());
-				oos.writeObject(type);
-				System.out.println("Sending Notification :" +type);
-				// read the server response message
-				ois = new ObjectInputStream(socket.getInputStream());
-				type = (String) ois.readObject();
-				System.out.println("Checked this is : " + type);
-				// close resources
-				socket.close();
-				ois.close();
-				oos.flush();
-				oos.close();
-				Thread.sleep(100);
-		
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(type);
+		System.out.println("Sending Notification :" + type);
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		type = (String) ois.readObject();
+		System.out.println("Checked this is : " + type);
+		// close resources
+		socket.close();
+		ois.close();
+		oos.flush();
+		oos.close();
+		Thread.sleep(100);
+
 	}
 
 }

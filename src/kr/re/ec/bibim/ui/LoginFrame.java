@@ -9,6 +9,7 @@ public class LoginFrame implements ActionListener {
 	//changed to protected
 	
 	private boolean topview = true;
+	protected JFrame jf = new JFrame();;
 	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
 	protected JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸
 																	// 패스워드 필드
@@ -19,7 +20,7 @@ public class LoginFrame implements ActionListener {
 	GridBagConstraints gbc;
 
 	public void init() {
-		JFrame jf = new JFrame();
+		
 		jf.setSize(350, 200);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 닫으면 프로그램 종료
 		jf.setAlwaysOnTop(topview);
@@ -35,7 +36,6 @@ public class LoginFrame implements ActionListener {
 
 		jf.setLocation(xPos, yPos);
 		jf.setResizable(false);
-
 		/*
 		 * jf.addWindowListener(new WindowAdapter() { public void
 		 * windowClosing(WindowEvent e) { System.exit(1); } });

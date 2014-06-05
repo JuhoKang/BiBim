@@ -71,8 +71,9 @@ public class LoginController extends LoginFrame{
 	    			
 	    			ThisUser.setUserid(loginuser.getUserid());
 	    			LogUtil.d("users userid is:"+ThisUser.getUserid());
-	    			new MainController().init();
+	    			MainController.getInstance().init();
 	    			new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			jf.dispose();
 	    			
 	    		}
 	    		

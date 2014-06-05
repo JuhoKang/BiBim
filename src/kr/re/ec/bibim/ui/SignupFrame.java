@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 public class SignupFrame implements ActionListener {
 	private boolean topview = true;
+	protected JFrame jf = new JFrame();
 	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
 	protected JPasswordField pwdtextfield = new JPasswordField(10); // 비밀번호를 쓸 패스워드 필드
 	protected JPasswordField pwdchecktextfield = new JPasswordField(10); // 비밀번호 확인 패스워드 필드
@@ -15,7 +16,7 @@ public class SignupFrame implements ActionListener {
 	GridBagConstraints gbc;
 
 	public void init() {
-		JFrame jf = new JFrame();
+		
 		jf.setSize(400, 200);
 		jf.setAlwaysOnTop(topview);
 		jf.setTitle("회원가입");

@@ -20,6 +20,8 @@ import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.NoteData;
 
 public class MainFrame extends JFrame implements ActionListener{
+	
+	
 	/**
 	 * 
 	 */
@@ -31,15 +33,13 @@ public class MainFrame extends JFrame implements ActionListener{
 	protected JButton folderrmbt = new JButton("폴더제거");
 	
 	
-	JList<String> folderlist = null;
-	JList<String> notelist = null;
+	public JList<String> folderlist = null;
+	public JList<String> notelist = null;
 	private Container con;
-	DefaultListModel<String> foldermodel = new DefaultListModel<String>();
-	DefaultListModel<String> notemodel = new DefaultListModel<String>();
+	public DefaultListModel<String> foldermodel = new DefaultListModel<String>();
+	public DefaultListModel<String> notemodel = new DefaultListModel<String>();
 //	DefaultListModel<FolderData> model1 = new DefaultListModel<FolderData>();
 //	DefaultListModel<FolderData> model2= new DefaultListModel<FolderData>();
-	ArrayList<FolderData> arfolder = new ArrayList<FolderData>();
-	ArrayList<NoteData> arnote = new ArrayList<NoteData>(); 
 	public void init() {
 		setTitle("Note Manager");
 

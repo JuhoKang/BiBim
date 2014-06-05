@@ -14,9 +14,5 @@ public class Main {
 		new LoginController().init();
 		//new SignupFrame().init();
 
-
-		//new LoginController().init();
-		new MainFrame();
-
 	}
 }

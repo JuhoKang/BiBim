@@ -31,11 +31,11 @@ public class PopupFrame extends JDialog{
 		int xPos = screenSize.width / 2 - this.getSize().width / 2;
 		int yPos = screenSize.height / 2 - this.getSize().height / 2;
 
-		this.setLocation(xPos-50, yPos-50);
+		this.setLocation(xPos-100, yPos-100);
 
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
-		this.setSize(200, 300);
+		this.setSize(300, 100);
 		this.setVisible(true);
 		
 

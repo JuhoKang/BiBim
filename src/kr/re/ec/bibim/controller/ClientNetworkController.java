@@ -8,14 +8,14 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import sun.rmi.runtime.Log;
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
+import kr.re.ec.bibim.vo.NoteData;
 import kr.re.ec.bibim.vo.UserData;
 import kr.re.ec.bibim.vowrapper.FolderDataWrapper;
+import kr.re.ec.bibim.vowrapper.NoteDataWrapper;
 import kr.re.ec.bibim.vowrapper.UserDataWrapper;
-import kr.re.ec.bibim.vowrapper.WrappedClassOpener;
 
 public class ClientNetworkController {
 
@@ -45,7 +45,7 @@ public class ClientNetworkController {
 
 		// get the localhost IP address, if server is running on some other IP,
 		// you need to use that
-		
+
 		InetAddress host = InetAddress.getLocalHost();
 		Socket socket = null;
 		ObjectOutputStream oos = null;
@@ -58,16 +58,16 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(udw);
-		System.out.println("Sending request to Socket Server");
+		LogUtil.d("Sending request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		udw = (UserDataWrapper) ois.readObject();
-		System.out.println("Message got: " + udw.getPassword());
+		LogUtil.d("Message got: " + udw.getPassword());
 		// close resources
 		socket.close();
 		ois.close();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
 	}
 
 	public UserData LoginRequest(UserDataWrapper udw)
@@ -91,7 +91,7 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(udw);
-		System.out.println("Sending Login request to Socket Server");
+		LogUtil.d("Sending Login request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		userdata = (UserData) ois.readObject();
@@ -101,7 +101,7 @@ public class ClientNetworkController {
 		socket.close();
 		ois.close();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
 
 		return userdata;
 	}
@@ -126,23 +126,24 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(udw);
-		System.out.println("Sending Sign up request to Socket Server");
+		LogUtil.d("Sending Sign up request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		userdata = (UserData) ois.readObject();
-		System.out.println("Message got: " + userdata.getUserid());
+		LogUtil.d("Message got: " + userdata.getUserid());
 		// close resources
 		socket.close();
 		ois.close();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
 
 		return userdata.getUserid();
 
 	}
 
-	public void FolderDeleteRequest(FolderDataWrapper fdw) throws UnknownHostException,
-			IOException, ClassNotFoundException, InterruptedException {
+	public void FolderDeleteRequest(FolderDataWrapper fdw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
 		notificateServer(Constants.NotificationConstantFrame.FOLDER);
 
 		FolderData folder = new FolderData();
@@ -161,16 +162,53 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(fdw);
-		System.out.println("Sending Sign up request to Socket Server");
+		LogUtil.d("Sending Folder delete request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		folder = (FolderData) ois.readObject();
-		System.out.println("Message got: " + folder.getUserid());
+		LogUtil.d("Message got: " + folder.getUserid());
 		// close resources
 		socket.close();
 		ois.close();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<NoteData> NoteSelectRequest(FolderDataWrapper fdw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		notificateServer(Constants.NotificationConstantFrame.FOLDER);
+		ArrayList<NoteData> resultnotes = new ArrayList<NoteData>();
+
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(fdw);
+		LogUtil.d("Sending note select request to Socket Server");
+		LogUtil.d("Header is :"+fdw.getQueryHeader() + "Expression is :"+fdw.getExpression());
+		LogUtil.d("Sending note select request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		resultnotes = (ArrayList<NoteData>) ois.readObject();
+		LogUtil.d("getting notes for this folder");
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		// Thread.sleep(20);
+		return resultnotes;
 
 	}
 
@@ -197,7 +235,7 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(udw);
-		System.out.println("Sending Folder Select request to Socket Server");
+		LogUtil.d("Sending Folder Select request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		resultfolders = (ArrayList<FolderData>) ois.readObject();
@@ -207,7 +245,7 @@ public class ClientNetworkController {
 		socket.close();
 		ois.close();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
 
 		return resultfolders;
 	}
@@ -232,16 +270,148 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(fdw);
-		System.out.println("Sending Folder Add request to Socket Server");
+		LogUtil.d("Sending Folder Add request to Socket Server");
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		folder = (FolderData) ois.readObject();
-		System.out.println("Message got: " + folder.getFolderid());
+		LogUtil.d("Message got: " + folder.getFolderid());
 		// close resources
 		socket.close();
 		ois.close();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
+	}
+	
+	public void AddNoteRequest(NoteDataWrapper ndw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		notificateServer(Constants.NotificationConstantFrame.NOTE);
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		NoteData note = new NoteData();
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(ndw);
+		LogUtil.d("Sending Note Add request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		note = (NoteData) ois.readObject();
+		LogUtil.d("Message got: " + note.getNoteid());
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		// Thread.sleep(20);
+	}
+	
+	public void getANoteRequest(NoteDataWrapper ndw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		notificateServer(Constants.NotificationConstantFrame.NOTE);
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		NoteData note = new NoteData();
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(ndw);
+		LogUtil.d("Sending Note get request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		note = (NoteData) ois.readObject();
+		LogUtil.d("Message got: " + note.getNoteid());
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		// Thread.sleep(20);
+	}
+	
+	public void NoteDeleteRequest(NoteDataWrapper ndw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		notificateServer(Constants.NotificationConstantFrame.NOTE);
+
+		NoteData note = new NoteData();
+
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(ndw);
+		LogUtil.d("Sending Delete note request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		note = (NoteData) ois.readObject();
+		LogUtil.d("deleted: ");
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		// Thread.sleep(20);
+
+	}
+	
+	public void NoteUpdateRequest(NoteDataWrapper ndw)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		notificateServer(Constants.NotificationConstantFrame.NOTE);
+
+		NoteData note = new NoteData();
+
+		// get the localhost IP address, if server is running on some other IP,
+		// you need to use that
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		// establish socket connection to server
+		socket = new Socket(host.getHostName(),
+				Constants.NetworkConstantFrame.SUBPORT);
+
+		// write to socket using ObjectOutputStream
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(ndw);
+		LogUtil.d("Sending Update note request to Socket Server");
+		// read the server response message
+		ois = new ObjectInputStream(socket.getInputStream());
+		note = (NoteData) ois.readObject();
+		LogUtil.d("updated: "+note.getDate());
+		// close resources
+		socket.close();
+		ois.close();
+		oos.close();
+		// Thread.sleep(20);
+
 	}
 
 	public void notificateServer(String type) throws IOException,
@@ -261,17 +431,17 @@ public class ClientNetworkController {
 		// write to socket using ObjectOutputStream
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(type);
-		System.out.println("Sending Notification :" + type);
+		LogUtil.d("Sending Notification :" + type);
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		type = (String) ois.readObject();
-		System.out.println("Checked this is : " + type);
+		LogUtil.d("Checked this is : " + type);
 		// close resources
 		socket.close();
 		ois.close();
 		oos.flush();
 		oos.close();
-		Thread.sleep(100);
+		// Thread.sleep(20);
 
 	}
 

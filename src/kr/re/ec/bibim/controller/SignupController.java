@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.ui.PopupFrame;
 import kr.re.ec.bibim.ui.SignupFrame;
@@ -84,7 +82,7 @@ public class SignupController extends SignupFrame{
 					break;
 				}
 				
-				
+				jf.dispose();
 				
 			}
 			

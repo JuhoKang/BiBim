@@ -2,13 +2,15 @@ package kr.re.ec.bibim.ui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 //changed to public
-public class PopupFrame extends JDialog{
+public class PopupFrame extends JDialog implements FocusListener{
 
 	/**
 	 * 
@@ -37,7 +39,20 @@ public class PopupFrame extends JDialog{
 		this.setResizable(false);
 		this.setSize(300, 100);
 		this.setVisible(true);
+		addFocusListener(this);
 		
 
+	}
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+		this.dispose();
+		
 	}
 }

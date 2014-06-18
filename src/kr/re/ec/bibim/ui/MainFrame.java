@@ -1,21 +1,30 @@
 package kr.re.ec.bibim.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.NoteData;
 
@@ -32,12 +41,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	protected JButton folderaddbt= new JButton("폴더추가");
 	protected JButton folderrmbt = new JButton("폴더제거");
 	
+	protected FolderData selectedfolder;
+	protected NoteData selectednote;
 	
-	public JList<String> folderlist = null;
-	public JList<String> notelist = null;
+	
+	public JList<FolderData> folderlist = null;
+	public JList<NoteData> notelist = null;
 	private Container con;
-	public DefaultListModel<String> foldermodel = new DefaultListModel<String>();
-	public DefaultListModel<String> notemodel = new DefaultListModel<String>();
+	public DefaultListModel<FolderData> foldermodel = new DefaultListModel<FolderData>();
+	public DefaultListModel<NoteData> notemodel = new DefaultListModel<NoteData>();
 //	DefaultListModel<FolderData> model1 = new DefaultListModel<FolderData>();
 //	DefaultListModel<FolderData> model2= new DefaultListModel<FolderData>();
 	public void init() {
@@ -57,11 +69,15 @@ public class MainFrame extends JFrame implements ActionListener{
 			model1.addElement(folder);
 		}
 		*/
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		folderlist = new JList(foldermodel);
+		folderlist.setCellRenderer(new FolderListCellRenderer());
+		folderlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane pane = new JScrollPane(folderlist);
 		
 		notelist = new JList(notemodel);
+		notelist.setCellRenderer(new NoteListCellRenderer());
+		notelist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane pane2 = new JScrollPane(notelist);
 
 
@@ -87,42 +103,12 @@ public class MainFrame extends JFrame implements ActionListener{
 		folderaddbt.addActionListener(this);
 		folderrmbt.addActionListener(this);
 		
-		
-		 ListSelectionListener listSelectionListener = new ListSelectionListener() {
-		      public void valueChanged(ListSelectionEvent listSelectionEvent) {
-		        System.out.print("First index: " + listSelectionEvent.getFirstIndex());
-		        System.out.print(", Last index: " + listSelectionEvent.getLastIndex());
-		        boolean adjust = listSelectionEvent.getValueIsAdjusting();
-		        System.out.println(", Adjusting? " + adjust);
-		        if (!adjust) {
-		          JList list = (JList) listSelectionEvent.getSource();
-		          int selections[] = list.getSelectedIndices();
-		          Object selectionValues[] = list.getSelectedValues();
-		          for (int i = 0, n = selections.length; i < n; i++) {
-		            if (i == 0) {
-		              System.out.print("  Selections: ");
-		            }
-		            System.out.print(selections[i] + "/" + selectionValues[i] + " ");
-		          }
-		          System.out.println();
-		        }
-		      }
-		    };
-		folderlist.addListSelectionListener(listSelectionListener);
+		folderlist.getSelectionModel().addListSelectionListener(new FolderListSelectionHandler());
+		folderlist.addMouseListener(new FolderListMouseListener());
+		notelist.getSelectionModel().addListSelectionListener(new FolderListSelectionHandler());
+		notelist.addMouseListener(new NoteListMouseListener());
+		//notelist.getSelectionModel().addListSelectionListener(new No);
 
-	    MouseListener mouseListener = new MouseAdapter() {
-	      public void mouseClicked(MouseEvent mouseEvent) {
-	        JList theList = (JList) mouseEvent.getSource();
-	        if (mouseEvent.getClickCount() == 2) {
-	          int index = theList.locationToIndex(mouseEvent.getPoint());
-	          if (index >= 0) {
-	            Object o = theList.getModel().getElementAt(index);
-	            System.out.println("Double-clicked on: " + o.toString());
-	          }
-	        }
-	      }
-	    };
-	    notelist.addMouseListener(mouseListener);
 
 		// 전체 창 사이즈 가져오는거네
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -149,5 +135,176 @@ public class MainFrame extends JFrame implements ActionListener{
 		} else if (arg0.getSource() == folderrmbt) {
 			
 		}
+	}
+	
+	protected class FolderListSelectionHandler implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) { 
+            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            
+            int firstIndex = e.getFirstIndex();
+            int lastIndex = e.getLastIndex();
+            boolean isAdjusting = e.getValueIsAdjusting(); 
+            String listlog;
+            listlog = 
+            		("Event for indexes "
+                          + firstIndex + " - " + lastIndex
+                          + "; isAdjusting is " + isAdjusting
+                          + "; selected indexes:");
+ 
+            if (lsm.isSelectionEmpty()) {
+                listlog.concat(" <none>");
+            } else {
+                // Find out which indexes are selected.
+                int minIndex = lsm.getMinSelectionIndex();
+                int maxIndex = lsm.getMaxSelectionIndex();
+                for (int i = minIndex; i <= maxIndex; i++) {
+                    if (lsm.isSelectedIndex(i)) {
+                        listlog.concat(" " + i);
+                    }
+                }
+            }
+            listlog.concat("\n");
+            LogUtil.d("listlog :" + listlog);
+        }
+    }
+
+	
+	protected class FolderListCellRenderer extends JLabel implements ListCellRenderer<FolderData>{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public FolderListCellRenderer() {
+			setOpaque(true);
+			// TODO Auto-generated constructor stub
+		}
+		
+		@Override
+		public Component getListCellRendererComponent(
+				JList<? extends FolderData> list, FolderData value, int index,
+				boolean isSelected, boolean cellHasFocus) {
+			
+			setText(value.getName());
+			// TODO Auto-generated method stub
+			if(isSelected){
+				setBackground(Color.LIGHT_GRAY);
+				setForeground(Color.RED);
+			}
+			else{
+				setBackground(Color.white);
+				setForeground(Color.black);
+			}
+			
+			return this;
+		}
+		
+	}
+	
+	protected class NoteListCellRenderer extends JLabel implements ListCellRenderer<NoteData>{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public NoteListCellRenderer() {
+			setOpaque(true);
+			// TODO Auto-generated constructor stub
+		}
+		
+		@Override
+		public Component getListCellRendererComponent(
+				JList<? extends NoteData> list, NoteData value, int index,
+				boolean isSelected, boolean cellHasFocus) {
+			setText("<html><b> Title : "+value.getTitle()+"</b><br>"+"<i><font color = gray>Date : "
+				+ value.getDate()+"</font></i></html>");
+			// TODO Auto-generated method stub
+			if(isSelected){
+				setBackground(Color.lightGray);
+				setForeground(Color.blue);
+			}
+			else{
+				setBackground(Color.white);
+				setForeground(Color.black);
+			}
+			
+			return this;
+		}
+		
+	}
+	
+	public class FolderListMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getClickCount() == 2){
+				int index = folderlist.locationToIndex(e.getPoint());
+				LogUtil.d("DoubleClicked on item at index" + index);
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	public class NoteListMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getClickCount() == 2){
+				int index = folderlist.locationToIndex(e.getPoint());
+				LogUtil.d("DoubleClicked on item at index" + index);
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

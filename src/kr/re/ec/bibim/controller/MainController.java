@@ -10,9 +10,11 @@ import java.util.ArrayList;
 
 import javax.swing.JList;
 
+import sun.rmi.runtime.Log;
 import kr.re.ec.bibim.ThisUser;
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.ui.MainFrame;
+import kr.re.ec.bibim.ui.PopupFrame;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.NoteData;
@@ -171,15 +173,14 @@ public class MainController extends MainFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		LogUtil.d("here");
 		notemodel.removeAllElements();
-		LogUtil.d("here");
+
 		changetoModelNote(resultnotes);
-		LogUtil.d("here");
+
 		notelist.removeAll();
-		LogUtil.d("here");
+
 		notelist.setModel(notemodel);
-		LogUtil.d("here");
+
 		LogUtil.d("get note list called");
 
 	}
@@ -267,8 +268,13 @@ public class MainController extends MainFrame {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == noteaddbt) {
-
-			new NoteController().init(selectedfolder);
+			if(selectedfolder == null){
+				new PopupFrame("폴더가 선택되지 않았습니다");
+				LogUtil.d("popup go");
+			} else{
+				new NoteController().init(selectedfolder);
+			}
+			
 
 		} else if (arg0.getSource() == notermbt) {
 			

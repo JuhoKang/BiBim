@@ -4,13 +4,18 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 //changed to public
-public class PopupFrame extends JDialog implements FocusListener{
+public class PopupFrame extends JDialog implements WindowFocusListener,MouseListener{
 
 	/**
 	 * 
@@ -39,20 +44,41 @@ public class PopupFrame extends JDialog implements FocusListener{
 		this.setResizable(false);
 		this.setSize(300, 100);
 		this.setVisible(true);
-		addFocusListener(this);
-		
-
+		this.addWindowFocusListener(this);
+		this.addMouseListener(this);
 	}
 	@Override
-	public void focusGained(FocusEvent e) {
+	public void windowGainedFocus(WindowEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public void focusLost(FocusEvent e) {
+	public void windowLostFocus(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
 		this.dispose();
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		this.dispose();
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

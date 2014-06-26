@@ -24,6 +24,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import kr.re.ec.bibim.controller.MainController;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.NoteData;
@@ -103,9 +104,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		folderaddbt.addActionListener(this);
 		folderrmbt.addActionListener(this);
 		
-		folderlist.getSelectionModel().addListSelectionListener(new FolderListSelectionHandler());
+	//	folderlist.getSelectionModel().addListSelectionListener(new FolderListSelectionHandler());
 		folderlist.addMouseListener(new FolderListMouseListener());
-		notelist.getSelectionModel().addListSelectionListener(new FolderListSelectionHandler());
 		notelist.addMouseListener(new NoteListMouseListener());
 		//notelist.getSelectionModel().addListSelectionListener(new No);
 
@@ -158,11 +158,17 @@ public class MainFrame extends JFrame implements ActionListener{
                 int minIndex = lsm.getMinSelectionIndex();
                 int maxIndex = lsm.getMaxSelectionIndex();
                 for (int i = minIndex; i <= maxIndex; i++) {
-                    if (lsm.isSelectedIndex(i)) {
+                    if (lsm.isSelectedIndex(i) && isAdjusting == true) {
+                    	selectedfolder = (FolderData) folderlist.getModel()
+								.getElementAt(i);
+						LogUtil.d("clicked on: "
+								+ selectedfolder.toString());
+						
                         listlog.concat(" " + i);
                     }
                 }
             }
+            MainController.getInstance().getNoteList();
             listlog.concat("\n");
             LogUtil.d("listlog :" + listlog);
         }

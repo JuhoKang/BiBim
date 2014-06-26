@@ -282,7 +282,7 @@ public class ClientNetworkController {
 		// Thread.sleep(20);
 	}
 	
-	public void AddNoteRequest(NoteDataWrapper ndw)
+	public NoteData AddNoteRequest(NoteDataWrapper ndw)
 			throws UnknownHostException, IOException, ClassNotFoundException,
 			InterruptedException {
 		notificateServer(Constants.NotificationConstantFrame.NOTE);
@@ -312,6 +312,7 @@ public class ClientNetworkController {
 		ois.close();
 		oos.close();
 		// Thread.sleep(20);
+		return note;
 	}
 	
 	public void getANoteRequest(NoteDataWrapper ndw)

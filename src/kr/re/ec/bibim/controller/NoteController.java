@@ -15,7 +15,6 @@ import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
 import kr.re.ec.bibim.constants.Constants;
-import kr.re.ec.bibim.ui.MainFrame;
 import kr.re.ec.bibim.ui.NoteFrame;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
@@ -232,6 +231,11 @@ public class NoteController extends NoteFrame implements WindowFocusListener,
 	}
 
 	protected class CtrlsAction extends AbstractAction {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

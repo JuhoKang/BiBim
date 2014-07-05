@@ -9,6 +9,10 @@ import kr.re.ec.bibim.ui.PopupFrame;
 
 public class PopupController extends PopupFrame implements WindowFocusListener,MouseListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4455161939334951939L;
 	public PopupController(String str){
 		super(str);
 		this.addWindowFocusListener(this);

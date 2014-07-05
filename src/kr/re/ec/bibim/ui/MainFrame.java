@@ -7,10 +7,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -53,6 +49,7 @@ public abstract class MainFrame extends JFrame{
 	public DefaultListModel<NoteData> notemodel = new DefaultListModel<NoteData>();
 //	DefaultListModel<FolderData> model1 = new DefaultListModel<FolderData>();
 //	DefaultListModel<FolderData> model2= new DefaultListModel<FolderData>();
+	
 	public void init() {
 		setTitle("Note Manager");
 
@@ -71,12 +68,12 @@ public abstract class MainFrame extends JFrame{
 		}
 		*/
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		folderlist = new JList(foldermodel);
+		folderlist = new JList<FolderData>(foldermodel);
 		folderlist.setCellRenderer(new FolderListCellRenderer());
 		folderlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane pane = new JScrollPane(folderlist);
 		
-		notelist = new JList(notemodel);
+		notelist = new JList<NoteData>(notemodel);
 		notelist.setCellRenderer(new NoteListCellRenderer());
 		notelist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane pane2 = new JScrollPane(notelist);

@@ -220,7 +220,6 @@ public class ClientNetworkController {
 		ArrayList<FolderData> resultfolders = new ArrayList<FolderData>();
 		notificateServer(Constants.NotificationConstantFrame.USER);
 
-		UserData userdata = new UserData();
 		// get the localhost IP address, if server is running on some other IP,
 		// you need to use that
 		InetAddress host = InetAddress.getLocalHost();
@@ -372,7 +371,7 @@ public class ClientNetworkController {
 		// read the server response message
 		ois = new ObjectInputStream(socket.getInputStream());
 		note = (NoteData) ois.readObject();
-		LogUtil.d("deleted: ");
+		LogUtil.d("deleted: "+ note.getTitle());
 		// close resources
 		socket.close();
 		ois.close();

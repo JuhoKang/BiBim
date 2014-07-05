@@ -11,11 +11,9 @@ import java.util.ArrayList;
 
 import javax.swing.JList;
 
-import sun.rmi.runtime.Log;
 import kr.re.ec.bibim.ThisUser;
 import kr.re.ec.bibim.constants.Constants;
 import kr.re.ec.bibim.ui.MainFrame;
-import kr.re.ec.bibim.ui.PopupFrame;
 import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.NoteData;

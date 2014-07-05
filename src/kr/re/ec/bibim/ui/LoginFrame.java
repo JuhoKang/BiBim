@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class LoginFrame implements ActionListener {
+public abstract class LoginFrame {
 	
 	//changed to protected
 	
@@ -76,19 +76,7 @@ public class LoginFrame implements ActionListener {
 		gbc.gridwidth = 3;
 		jf.add(pn1,gbc);
 
-		signupbt.addActionListener(this);
-		loginbt.addActionListener(this);
 
-	}
-
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		if (arg0.getSource() == signupbt) {
-			new SignupFrame().init();
-		} else if (arg0.getSource() == loginbt) {
-			//new PopupFrame(arg0.getActionCommand() + " 버튼을 누르셨군요!");
-			new MainFrame();
-		}
 	}
 
 }

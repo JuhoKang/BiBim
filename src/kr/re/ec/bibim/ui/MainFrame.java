@@ -29,7 +29,7 @@ import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vo.NoteData;
 
-public class MainFrame extends JFrame implements ActionListener{
+public abstract class MainFrame extends JFrame{
 	
 	
 	/**
@@ -99,14 +99,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		con.add(pn1);
 		con.add(pn2);
 
-		noteaddbt.addActionListener(this);
-		notermbt.addActionListener(this);
-		folderaddbt.addActionListener(this);
-		folderrmbt.addActionListener(this);
+		
 		
 	//	folderlist.getSelectionModel().addListSelectionListener(new FolderListSelectionHandler());
-		folderlist.addMouseListener(new FolderListMouseListener());
-		notelist.addMouseListener(new NoteListMouseListener());
 		//notelist.getSelectionModel().addListSelectionListener(new No);
 
 
@@ -123,20 +118,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		setVisible(true);
 		setAlwaysOnTop(topview);
 	}
-	
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		if (arg0.getSource() == noteaddbt) {
-			
-		} else if (arg0.getSource() == notermbt) {
-			
-		} else if (arg0.getSource() == folderaddbt){
-			
-		} else if (arg0.getSource() == folderrmbt) {
-			
-		}
-	}
-	
 	protected class FolderListSelectionHandler implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) { 
             ListSelectionModel lsm = (ListSelectionModel)e.getSource();
@@ -237,79 +218,6 @@ public class MainFrame extends JFrame implements ActionListener{
 			}
 			
 			return this;
-		}
-		
-	}
-	
-	public class FolderListMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getClickCount() == 2){
-				int index = folderlist.locationToIndex(e.getPoint());
-				LogUtil.d("DoubleClicked on item at index" + index);
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-	public class NoteListMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getClickCount() == 2){
-				int index = folderlist.locationToIndex(e.getPoint());
-				LogUtil.d("DoubleClicked on item at index" + index);
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 		
 	}

@@ -1,6 +1,7 @@
 package kr.re.ec.bibim.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,7 +23,7 @@ import kr.re.ec.bibim.vowrapper.FolderDataWrapper;
 import kr.re.ec.bibim.vowrapper.NoteDataWrapper;
 import kr.re.ec.bibim.vowrapper.UserDataWrapper;
 
-public class MainController extends MainFrame {
+public class MainController extends MainFrame implements ActionListener{
 
 	// for singleton
 	private static MainController instance = null;
@@ -76,7 +77,7 @@ public class MainController extends MainFrame {
 		MouseListener folderMouseListener = new MouseAdapter() {
 			public void mouseClicked(MouseEvent mouseEvent) {
 				JList theList = (JList) mouseEvent.getSource();
-				if (mouseEvent.getClickCount() == 2) {
+				if (mouseEvent.getClickCount() == 1 ) {
 					int index = theList.locationToIndex(mouseEvent.getPoint());
 					if (index >= 0) {
 						selectedfolder = (FolderData) theList.getModel()
@@ -91,7 +92,89 @@ public class MainController extends MainFrame {
 		};
 		folderlist.addMouseListener(folderMouseListener);
 		notelist.addMouseListener(mouseListener);
+	//	folderlist.addMouseListener(new FolderListMouseListener());
+	//	notelist.addMouseListener(new NoteListMouseListener());
+		noteaddbt.addActionListener(this);
+		notermbt.addActionListener(this);
+		folderaddbt.addActionListener(this);
+		folderrmbt.addActionListener(this);
 	}
+	
+
+	/* deprecated
+	public class FolderListMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getClickCount() == 2){
+				int index = folderlist.locationToIndex(e.getPoint());
+				LogUtil.d("DoubleClicked on item at index" + index);
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	public class NoteListMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getClickCount() == 2){
+				int index = folderlist.locationToIndex(e.getPoint());
+				LogUtil.d("DoubleClicked on item at index" + index);
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	*/
 
 	public void getFolderList() {
 		ArrayList<FolderData> resultfolders = new ArrayList<FolderData>();
@@ -269,7 +352,7 @@ public class MainController extends MainFrame {
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == noteaddbt) {
 			if(selectedfolder == null){
-				new PopupFrame("폴더가 선택되지 않았습니다");
+				new PopupController("폴더가 선택되지 않았습니다");
 				LogUtil.d("popup go");
 			} else{
 				new NoteController().init(selectedfolder);

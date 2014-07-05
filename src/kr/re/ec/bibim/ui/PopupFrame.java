@@ -15,7 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 //changed to public
-public class PopupFrame extends JDialog implements WindowFocusListener,MouseListener{
+public abstract class PopupFrame extends JDialog {
 
 	/**
 	 * 
@@ -44,41 +44,7 @@ public class PopupFrame extends JDialog implements WindowFocusListener,MouseList
 		this.setResizable(false);
 		this.setSize(300, 100);
 		this.setVisible(true);
-		this.addWindowFocusListener(this);
-		this.addMouseListener(this);
-	}
-	@Override
-	public void windowGainedFocus(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public void windowLostFocus(WindowEvent e) {
-		// TODO Auto-generated method stub
-		this.dispose();
-	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		this.dispose();
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

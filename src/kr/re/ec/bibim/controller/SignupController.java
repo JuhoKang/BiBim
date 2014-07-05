@@ -1,6 +1,7 @@
 package kr.re.ec.bibim.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -10,7 +11,13 @@ import kr.re.ec.bibim.ui.SignupFrame;
 import kr.re.ec.bibim.vo.UserData;
 import kr.re.ec.bibim.vowrapper.UserDataWrapper;
 
-public class SignupController extends SignupFrame{
+public class SignupController extends SignupFrame implements ActionListener{
+	
+	public void init(){
+		super.init();
+		signupbt.addActionListener(this);
+		cancelbt.addActionListener(this);
+	}
 	
 	public UserDataWrapper wrapUserDataToSignup (UserData userdata){
 		
@@ -51,7 +58,7 @@ public class SignupController extends SignupFrame{
 			
 			udw = wrapUserDataToSignup(signupuser);
 			if( isequal == false ){
-				new PopupFrame(arg0.getActionCommand() + " 비밀번호와 비밀번호확인이 같지 않습니다 ");
+				new PopupController(arg0.getActionCommand() + " 비밀번호와 비밀번호확인이 같지 않습니다 ");
 			}
 			else {
 				try {
@@ -72,13 +79,13 @@ public class SignupController extends SignupFrame{
 				
 				switch(checkservice) {
 				case -1:
-					new PopupFrame(arg0.getActionCommand() + " 이미 있는 아이디 ");
+					new PopupController(arg0.getActionCommand() + " 이미 있는 아이디 ");
 					break;
 				case 0:
-					new PopupFrame(arg0.getActionCommand() + " 서버가 꺼져 있습니다 ");
+					new PopupController(arg0.getActionCommand() + " 서버가 꺼져 있습니다 ");
 					break;
 				default :
-					new PopupFrame(arg0.getActionCommand() + " 회원가입 성공 ");
+					new PopupController(arg0.getActionCommand() + " 회원가입 성공 ");
 					break;
 				}
 				

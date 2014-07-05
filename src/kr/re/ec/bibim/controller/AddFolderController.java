@@ -1,6 +1,7 @@
 package kr.re.ec.bibim.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -10,7 +11,14 @@ import kr.re.ec.bibim.ui.AddFolderFrame;
 import kr.re.ec.bibim.vo.FolderData;
 import kr.re.ec.bibim.vowrapper.FolderDataWrapper;
 
-public class AddFolderController extends AddFolderFrame{
+public class AddFolderController extends AddFolderFrame implements ActionListener{
+	
+	public void init(){
+		super.init();
+		okbt.addActionListener(this);
+		cancelbt.addActionListener(this);
+
+	}
 	
 	private FolderDataWrapper wrapFolderDataToInsert(FolderData folderdata){
 		

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AddFolderFrame implements ActionListener {
+public abstract class AddFolderFrame {
 	private boolean topview = true;
 	private Container con;
 	protected JFrame jf= new JFrame();
@@ -46,9 +46,6 @@ public class AddFolderFrame implements ActionListener {
 		con.add(pn1);
 		con.add(pn2);		
 		
-		okbt.addActionListener(this);
-		cancelbt.addActionListener(this);
-
 	}
 
 	

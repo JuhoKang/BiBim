@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SignupFrame implements ActionListener {
+public abstract class SignupFrame{
 	private boolean topview = true;
 	protected JFrame jf = new JFrame();
 	protected JTextField idtextfield = new JTextField(10); // 아이디를 쓸 텍스트 필드
@@ -87,18 +87,5 @@ public class SignupFrame implements ActionListener {
 		
 		//signupbt.putClientProperty("JComponent.sizeVariant","mini");
 
-		signupbt.addActionListener(this);
-		cancelbt.addActionListener(this);
-
 	}
-
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		if (arg0.getSource() == signupbt) {
-			
-		} else if (arg0.getSource() == cancelbt) {
-			
-		}
-	}
-
 }

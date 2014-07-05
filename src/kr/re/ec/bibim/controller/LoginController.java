@@ -1,6 +1,7 @@
 package kr.re.ec.bibim.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -12,7 +13,13 @@ import kr.re.ec.bibim.util.LogUtil;
 import kr.re.ec.bibim.vo.UserData;
 import kr.re.ec.bibim.vowrapper.UserDataWrapper;
 
-public class LoginController extends LoginFrame{
+public class LoginController extends LoginFrame implements ActionListener {
+	
+	public void init(){
+		super.init();
+		signupbt.addActionListener(this);
+		loginbt.addActionListener(this);
+	}
 	
 	public void login(){
 		
@@ -61,17 +68,17 @@ public class LoginController extends LoginFrame{
 				}
 	    		LogUtil.d("userid : "+loginuser.getUserid());
 	    		if(loginuser.getUserid() < 0){
-	    			new PopupFrame(arg0.getActionCommand() + " 회원이 아닙니다 회원가입을 해주세요 ");
+	    			new PopupController(arg0.getActionCommand() + " 회원이 아닙니다 회원가입을 해주세요 ");
 	    		}
 	    		else if(loginuser.getUserid() == 0) {
-	    			new PopupFrame(arg0.getActionCommand() + " 서버와의 연결에 실패 했습니다 ");
+	    			new PopupController(arg0.getActionCommand() + " 서버와의 연결에 실패 했습니다 ");
 	    		}
 	    		else {
 	    			
 	    			ThisUser.setUserid(loginuser.getUserid());
 	    			LogUtil.d("users userid is:"+ThisUser.getUserid());
 	    			MainController.getInstance().init();
-	    			new PopupFrame(arg0.getActionCommand() + " 로그인 완료 ");
+	    			new PopupController(arg0.getActionCommand() + " 로그인 완료 ");
 	    			jf.dispose();
 	    			
 	    		}

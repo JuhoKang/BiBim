@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class NoteFrame extends JFrame{
+public abstract class NoteFrame extends JFrame{
 	/**
 	 * 
 	 */

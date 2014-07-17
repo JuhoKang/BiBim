@@ -13,6 +13,7 @@ public class Main {
 		Logger logger = LoggerFactory.getLogger(Main.class);
 		logger.info("hello!");
 		logger.info(""+logger.isDebugEnabled());
+		//assas
 		logger.debug("shit");
 		new LoginController().init();
 		//new SignupFrame().init();
